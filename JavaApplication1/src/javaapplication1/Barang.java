@@ -15,6 +15,15 @@ public class Barang {
     private String kondisi;
     private String status;
     private long id;
+    public Barang(String nama,int jumlah,String kondisi, String status, long id)
+    {
+        setnamaBarang(nama);
+        setjumlah(jumlah);
+        setkondisi(kondisi);
+        setstatus(status);
+        setId(id);
+        
+    }
     public void setnamaBarang(String namaBarang)
     {
         this.namaBarang=namaBarang;
@@ -31,7 +40,7 @@ public class Barang {
     {
         this.status=status;
     }
-    public viud setId(long id)
+    public void setId(long id)
     {
         this.id=id;
     }
