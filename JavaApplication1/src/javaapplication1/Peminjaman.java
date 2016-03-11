@@ -13,13 +13,15 @@ import java.util.Date;
  */
 public class Peminjaman
 {
-    private ArrayList<Barang> pinjaman;
+    private ArrayList<Barang> pinjaman = new ArrayList();
     private String status;
+    private long id;
     private int nBarang;
     private Date tanggal;
-    public Peminjaman(Date tanggal)
+    public Peminjaman(Date tanggal,long id)
     {
         this.tanggal=tanggal;
+        this.id = id;
         pinjaman=new ArrayList();
     }
     public void addPinjaman(Barang b)
@@ -30,22 +32,13 @@ public class Peminjaman
     }
     public void deletePinjaman(long id)
     {
-        for(int i=0;i<10;i++)
+        for(int i=0;i<this.pinjaman.size();i++)
         {
             if(pinjaman.get(i).getId()==id)
             {
                 pinjaman.get(i).setstatus("tersedia");
                 pinjaman.remove(i);
             }
-        }
-    }
-    public void displayBarang(){
-        for (int i=0;i<nBarang;i++){
-            System.out.println("Nama Barang : "+pinjaman.get(i).getNamaBarang());
-            System.out.println("ID Barang   : "+pinjaman.get(i).getId());
-            System.out.println("Status Barang   : "+pinjaman.get(i).getStatus());
-            System.out.println("Kondisi Barang  :"+pinjaman.get(i).getKondisi());
-            
         }
     }
     public String getStatus() {
@@ -57,13 +50,12 @@ public class Peminjaman
     }
 
     public int getnBarang() {
-        return nBarang;
+        return nBarang+1;
     }
 
     public void setnBarang(int nBarang) {
         this.nBarang = nBarang;
     }
-
     public Barang getPinjaman(int i) {
         return pinjaman.get(i);
     }
@@ -74,5 +66,12 @@ public class Peminjaman
 
     public void setTanggal(Date tanggal) {
         this.tanggal = tanggal;
-    }    
+    }  
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }
