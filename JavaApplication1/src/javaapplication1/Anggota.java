@@ -5,6 +5,7 @@
  */
 package javaapplication1;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -12,7 +13,7 @@ import java.util.Date;
  *
  * @author idoarif
  */
-public class Anggota extends Orang {
+public class Anggota extends Orang implements Serializable {
 
     private ArrayList<Peminjaman> riwayatPinjaman = new ArrayList();
     private Peminjaman p;
@@ -27,6 +28,7 @@ public class Anggota extends Orang {
         p = new Peminjaman(tanggal, id);
         riwayatPinjaman.add(p);
         i = this.riwayatPinjaman.size() - 1;
+
         riwayatPinjaman.get(i).setStatus("sedang meminjam");
     }
 
@@ -34,31 +36,48 @@ public class Anggota extends Orang {
         for (int i = 0; i < this.riwayatPinjaman.size(); i++) {
             if (riwayatPinjaman.get(i).getId() == id) {
                 riwayatPinjaman.get(i).setStatus("sudah dikembalikan");
-                riwayatPinjaman.get(i).getPinjaman(i).setstatus("Tersedia");
+                for (int j = 0; j < riwayatPinjaman.get(i).getnBarang()+1; j++) {
+                    riwayatPinjaman.get(i).getPinjaman(j).setstatus("Tersedia");
+                }
+
             }
-
         }
-
     }
 
     public Peminjaman getPinjaman(int i) {
         return riwayatPinjaman.get(i);
     }
 
-    public void display() {
-        System.out.println("nama: " + getNama());
-        System.out.println("id  : " + getId());
+    public void displayPeminjaman() {
+        System.out.println("Nama: " + getNama());
+        System.out.println("Id  : " + getId());
         for (int i = 0; i < this.riwayatPinjaman.size(); i++) {
-            System.out.println("pinjaman pada tanggal: " + riwayatPinjaman.get(i).getTanggal());
-            for (int j = 0; j < riwayatPinjaman.get(i).getnBarang(); j++) {
-                System.out.println("nama: " + riwayatPinjaman.get(i).getPinjaman(j).getNamaBarang() + "\n"
-                        + "ID  : " + riwayatPinjaman.get(i).getPinjaman(j).getId() + "\n"
-                        + "Jumlah :" + riwayatPinjaman.get(i).getPinjaman(j).getJumlah() + "\n"
-                        + "Kondisi: " + riwayatPinjaman.get(i).getPinjaman(j).getKondisi());
+            System.out.println("\nPinjaman pada Tanggal: " + riwayatPinjaman.get(i).getTanggal());
+            System.out.println("Status Peminjaman: "+riwayatPinjaman.get(i).getStatus());
+            System.out.println("Meminjam Barang Berikut: ");
+            if (riwayatPinjaman.get(i).getnBarang() != -1) {
+                for (int j = 0; j <= riwayatPinjaman.get(i).getnBarang(); j++) {
+                    if (j != -1) {
+                        System.out.println("Nama Barang: " + riwayatPinjaman.get(i).getPinjaman(j).getNamaBarang() + "\n"
+                                + "ID   : " + riwayatPinjaman.get(i).getPinjaman(j).getId() + "\n"
+                                + "Jumlah :" + riwayatPinjaman.get(i).getPinjaman(j).getJumlah() + "\n"
+                                + "Kondisi: " + riwayatPinjaman.get(i).getPinjaman(j).getKondisi());
+                    }
+                }
 
+            } else {
+                System.out.println("Anda Belum Input Barang");
             }
 
         }
+    }
+
+    public void display() {
+        System.out.println("Anggota Berhasil Dibuat");
+        System.out.println("Nama : "
+                + getNama());
+        System.out.println("Id  : " + getId());
+
     }
 
     public int getJumlahPinjaman() {

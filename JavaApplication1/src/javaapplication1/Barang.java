@@ -5,11 +5,13 @@
  */
 package javaapplication1;
 
+import java.io.Serializable;
+
 /**
  *
  * @author martaniadewi
  */
-public class Barang {
+public class Barang implements Serializable{
 
     private String namaBarang;
     private int jumlah;

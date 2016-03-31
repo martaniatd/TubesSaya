@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -26,9 +27,8 @@ public class Peminjaman
     }
     public void addPinjaman(Barang b)
     {
-        nBarang=this.pinjaman.size();
         pinjaman.add(b);
-        pinjaman.get(nBarang).setstatus("Terpinjam");
+        pinjaman.get(this.pinjaman.size()-1).setstatus("Terpinjam");
     }
     public void deletePinjaman(long id)
     {
@@ -50,7 +50,7 @@ public class Peminjaman
     }
 
     public int getnBarang() {
-        return nBarang+1;
+        return this.pinjaman.size()-1;
     }
 
     public void setnBarang(int nBarang) {
