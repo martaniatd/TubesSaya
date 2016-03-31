@@ -156,25 +156,27 @@ public class Konsol {
     }
 
     public void menuSatu() {
-        System.out.print("Nama Petugas : ");
+        System.out.print("Nama Petugas  : ");
         in.nextLine();
         nama = in.next();
-        System.out.print("ID Petugas : ");
+        System.out.print("ID Petugas    : ");
         id = in.nextLong();
         Petugas p = new Petugas(nama, id);
         addPetugas(p);
         
         System.out.println("Petugas Berhasil Login!");
+        SavePetugas(daftarPetugas);
+    }
+    public void menuSebelas(){
         System.out.println("Data Petugas");
         displayPetugas();
-        SavePetugas(daftarPetugas);
     }
 
     public void menuDua() {
-        System.out.print("Nama Anggota : ");
+        System.out.print("Nama Anggota  : ");
         in.nextLine();
         nama = in.nextLine();
-        System.out.print("Id Anggota : ");
+        System.out.print("Id Anggota    : ");
         id = in.nextLong();
         Anggota a = new Anggota(nama, id);
         addAnggota(a);
@@ -182,12 +184,12 @@ public class Konsol {
     }
 
     public void menuTiga() {
-        System.out.print("Nama Barang : ");
+        System.out.print("Nama Barang   : ");
         in.nextLine();
         String nama = in.next();
         System.out.print("Jumlah Barang : ");
         int jumlah = in.nextInt();
-        System.out.print("Kondisi Barang : ");
+        System.out.print("Kondisi Barang: ");
         String kondisi = in.next();
         System.out.print("Status Barang : ");
         String status = in.next();
@@ -197,7 +199,6 @@ public class Konsol {
         addBarang(b);
         System.out.println("Barang Berhasil Ditambahkan!");
         System.out.println("Data Barang  ");
-        displayBarang();
     }
 
     public void menuEmpat() {
@@ -279,20 +280,21 @@ public class Konsol {
 
     public void mainMenu() {
         int pilihan;
-        LoadPetugas(daftarPetugas);
         System.out.println("==============================================");
         System.out.println("Sistem Informasi Pengelolaan Peminjaman Barang");
         System.out.println("==============================================");
         System.out.println("Main Menu");
         System.out.println("\n1. Add Petugas ");
-        System.out.println("2. Add Anggota");
-        System.out.println("3. Add Barang ke Toko");
-        System.out.println("4. Delete Anggota");
-        System.out.println("5. Kembalikan Barang");
-        System.out.println("6. Membuat Laporan Peminjaman");
-        System.out.println("7. Menambahkan Barang Pinjaman");
-        System.out.println("8. Display Riwayat Peminjaman dan Daftar Barang");
-        System.out.println("9. Kembalikan barang Pinjaman");
+        System.out.println("2. Tampil Data Petugas");
+        System.out.println("3. Add Anggota");
+        System.out.println("4. Add Barang");
+        System.out.println("5. Add Barang ke Toko");
+        System.out.println("6. Delete Anggota");
+        System.out.println("7. Kembalikan Barang");
+        System.out.println("8. Membuat Laporan Peminjaman");
+        System.out.println("9. Menambahkan Barang Pinjaman");
+        System.out.println("10. Display Riwayat Peminjaman dan Daftar Barang");
+        System.out.println("11. Kembalikan barang Pinjaman");
         System.out.println("0. Exit!");
         do {
             System.out.println("===============================");
@@ -305,37 +307,43 @@ public class Konsol {
                     menuSatu();
                     break;
                 case 2:
+                    menuSebelas();
+                    break;
+                case 3:
                     System.out.println("Add Anggota");
                     menuDua();                    
                     break;
-                case 3:
+                case 4:
                     System.out.println("Add Barang");    
                     menuTiga();
                     break;
-                case 4:
+                case 5:
                     System.out.println("Delete Anggota");
                     menuEmpat();
                     break;
-                case 5:
+                case 6:
                     System.out.println("Kembalikan Barang");
                     menuLima();
                     break;
-                case 6:
+                case 7:
                     System.out.println("Membuat Laporan Peminjaman");
                     menuEnam();
                     break;
-                case 7:
+                case 8:
                     System.out.println("Menambahkan Barang Pinjaman");
                     menuTujuh();
                     break;
-                case 8:
+                case 9:
                     System.out.println("Display Riwayat Peminjaman dan Daftar Barang");
                     menuDelapan();
                     break;
-                case 9:
+                case 10:
                     System.out.println("Kembalikan barang Pinjaman");
                     menuSembilan();
                     break;
+                case 11:
+                    System.out.println("Display Barang yang Ada di Toko");
+                    displayBarang();
             }
         } while (pilihan != 0);
     }
