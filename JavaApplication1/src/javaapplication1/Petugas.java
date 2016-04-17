@@ -18,6 +18,10 @@ public class Petugas extends Orang implements Serializable {
         super(nama, id);
     }
 
+    public Petugas(){
+        
+    }
+
     public void display() {
         System.out.println("Nama Petugas : " + getNama());
         System.out.println("Id Petugas : " + getId());

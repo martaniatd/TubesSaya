@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author martaniadewi
  */
-public class Barang implements Serializable{
+public class Barang implements Serializable {
 
     private String namaBarang;
     private int jumlah;
@@ -68,11 +68,16 @@ public class Barang implements Serializable{
         return id;
     }
 
-    public void displayBarang() {
-        System.out.println("Nama Barang : " + getNamaBarang());
-        System.out.println("ID Barang   : " + getId());
-        System.out.println("Status Barang   : " + getStatus());
-        System.out.println("Kondisi Barang  :" + getKondisi());
+    public String displayBarang() {
+        String tampil = "=========================================== \n"
+                + "Nama Barang      : " + getNamaBarang() + "\n"
+                + "ID Barang        : " + getId() + "\n"
+                + "Status Barang    : " + getStatus() + "\n"
+                + "Kondisi Barang   : " + getKondisi() + "\n"
+                + "Jumlah Barang    : " + getJumlah() + "\n"
+                + "=========================================== \n";
+        return tampil;
 
     }
+
 }

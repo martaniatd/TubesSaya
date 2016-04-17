@@ -19,9 +19,19 @@ public class Anggota extends Orang implements Serializable {
     private Peminjaman p;
     private int nPeminjaman;
     int i = 0;
+    String kota;
 
-    public Anggota(String nama, long id) {
+    public Anggota(String nama, long id, String kota) {
         super(nama, id);
+        this.kota = kota;
+    }
+
+    public void setKota(String kota) {
+        this.kota = kota;
+    }
+
+    public String getKota() {
+        return kota;
     }
 
     public void createPeminjaman(Date tanggal, long id) {
@@ -32,12 +42,16 @@ public class Anggota extends Orang implements Serializable {
         riwayatPinjaman.get(i).setStatus("sedang meminjam");
     }
 
+    public ArrayList<Peminjaman> getAllPinjaman() {
+        return riwayatPinjaman;
+    }
+
     public void KembalikanPinjaman(long id) {
         for (int i = 0; i < this.riwayatPinjaman.size(); i++) {
             if (riwayatPinjaman.get(i).getId() == id) {
                 riwayatPinjaman.get(i).setStatus("sudah dikembalikan");
-                for (int j = 0; j < riwayatPinjaman.get(i).getnBarang()+1; j++) {
-                    riwayatPinjaman.get(i).getPinjaman(j).setstatus("Tersedia");
+                for (int j = 0; j < riwayatPinjaman.get(i).getnBarang() + 1; j++) {
+                    riwayatPinjaman.get(i).getBarangPinjaman(j).setstatus("Tersedia");
                 }
 
             }
@@ -48,30 +62,6 @@ public class Anggota extends Orang implements Serializable {
         return riwayatPinjaman.get(i);
     }
 
-    public void displayPeminjaman() {
-        System.out.println("Nama: " + getNama());
-        System.out.println("Id  : " + getId());
-        for (int i = 0; i < this.riwayatPinjaman.size(); i++) {
-            System.out.println("\nPinjaman pada Tanggal: " + riwayatPinjaman.get(i).getTanggal());
-            System.out.println("Status Peminjaman: "+riwayatPinjaman.get(i).getStatus());
-            System.out.println("Meminjam Barang Berikut: ");
-            if (riwayatPinjaman.get(i).getnBarang() != -1) {
-                for (int j = 0; j <= riwayatPinjaman.get(i).getnBarang(); j++) {
-                    if (j != -1) {
-                        System.out.println("Nama Barang: " + riwayatPinjaman.get(i).getPinjaman(j).getNamaBarang() + "\n"
-                                + "ID   : " + riwayatPinjaman.get(i).getPinjaman(j).getId() + "\n"
-                                + "Jumlah :" + riwayatPinjaman.get(i).getPinjaman(j).getJumlah() + "\n"
-                                + "Kondisi: " + riwayatPinjaman.get(i).getPinjaman(j).getKondisi());
-                    }
-                }
-
-            } else {
-                System.out.println("Anda Belum Input Barang");
-            }
-
-        }
-    }
-
     public void display() {
         System.out.println("Anggota Berhasil Dibuat");
         System.out.println("Nama : "
@@ -79,6 +69,21 @@ public class Anggota extends Orang implements Serializable {
         System.out.println("Id  : " + getId());
 
     }
+
+    public String displayAnggota() {
+        String tampil = "================================================================================ \n"
+                + "Nama Anggota: " + getNama() + "\n"
+                + "ID Anggota  : " + getId() + "\n"
+                + "Asal Kota   : " + getKota() + "\n";
+        return tampil;
+    }
+    public String displayAnggotasatu(){
+        String tampil ="================================================================================ \n"
+                + "Nama Anggota: " + getNama() + "\n"
+                + "ID Anggota  : " + getId() + "\n";
+        return tampil;
+    }
+    
 
     public int getJumlahPinjaman() {
         return this.riwayatPinjaman.size();

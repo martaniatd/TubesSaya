@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package javaapplication1;
+package Controller;
 
+import View.NewFrame;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -14,7 +15,14 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javaapplication1.Anggota;
+import javaapplication1.Barang;
+import javaapplication1.Peminjaman;
+import javaapplication1.Petugas;
 import javax.swing.JOptionPane;
+import javax.swing.RootPaneContainer;
 
 /**
  *
@@ -32,36 +40,95 @@ public class Konsol {
     Date date = new Date();
     String nama;
     long id;
+    NewFrame nf = new NewFrame();
+
+    public Konsol() {
+        if (LoadPetugas() != null) {
+            daftarPetugas = LoadPetugas();
+        }
+        if (LoadBarang() != null) {
+            daftarBarang = LoadBarang();
+        }
+        if (LoadAnggota() != null) {
+            daftarAnggota = LoadAnggota();
+        }
+    }
 
     public void addPetugas(Petugas p) {
         daftarPetugas.add(p);
     }
-    public void SavePetugas (ArrayList<Petugas> p){
-        try {
-            FileOutputStream fos = new FileOutputStream("Petugas.txt");
-            ObjectOutputStream os = new ObjectOutputStream(fos);
-            os.writeObject(p);
-            os.flush();
-        }
-        catch (IOException e){
-            System.out.println("data tidak ditemukan");
-        }
+
+    public int getJumlahAnggota() {
+        return daftarAnggota.size();
     }
-    
-    public void LoadPetugas (ArrayList<Petugas> p){
+
+    public int getJumlahPetugas() {
+        return daftarPetugas.size();
+    }
+
+    public void SavePetugas(Object o) throws Exception {
+        FileOutputStream f = new FileOutputStream("Petugas.txt");
+        ObjectOutputStream out = new ObjectOutputStream(f);
+        out.writeObject(o);
+        out.close();
+        f.close();
+    }
+
+    public void SaveBarang(Object o) throws Exception {
+        FileOutputStream f = new FileOutputStream("Barang.txt");
+        ObjectOutputStream out = new ObjectOutputStream(f);
+        out.writeObject(o);
+        out.close();
+        f.close();
+    }
+
+    public void SaveAnggota(Object o) throws Exception {
+        FileOutputStream f = new FileOutputStream("Anggota.txt");
+        ObjectOutputStream out = new ObjectOutputStream(f);
+        out.writeObject(o);
+        out.close();
+        f.close();
+    }
+
+    public ArrayList<Petugas> LoadPetugas() {
+        ArrayList<Petugas> a = new ArrayList<>();
         try {
+
             FileInputStream fis = new FileInputStream("Petugas.txt");
-            ObjectInputStream ois = new ObjectInputStream (fis);
-            while ((p = (ArrayList<Petugas>)ois.readObject())!=null){
-                System.out.println("data berhasil di load");
-            }
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            a = (ArrayList<Petugas>) ois.readObject();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-        catch (ClassNotFoundException e){
-            System.out.println("data error");
+        return a;
+    }
+
+    public ArrayList<Anggota> LoadAnggota() {
+        ArrayList<Anggota> a = new ArrayList<>();
+        try {
+
+            FileInputStream fis = new FileInputStream("Anggota.txt");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            a = (ArrayList<Anggota>) ois.readObject();
+//            System.out.println(a.get(0).displayAnggota());
+//            System.out.println(a.get(0).getPinjaman(0).displayPinjaman());
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-        catch (IOException e){
-            System.out.println("data tidak ditemukan");
+        return a;
+    }
+
+    public ArrayList<Barang> LoadBarang() {
+        ArrayList<Barang> a = new ArrayList<>();
+        try {
+
+            FileInputStream fis = new FileInputStream("Barang.txt");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            a = (ArrayList<Barang>) ois.readObject();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
+        return a;
     }
 
     public Petugas getPetugas(long id) {
@@ -79,7 +146,7 @@ public class Konsol {
             if (daftarPetugas.get(i).getId() == id) {
                 daftarPetugas.remove(i);
             }
-            
+
         }
     }
 
@@ -97,13 +164,25 @@ public class Konsol {
         return daftarAnggota.get(t);
     }
 
+    public ArrayList<Anggota> getAllAnggota() {
+
+        return daftarAnggota;
+    }
+
+    public ArrayList<Petugas> getAllPetugas() {
+        return daftarPetugas;
+    }
+
+    public ArrayList<Barang> getAllBarang() {
+        return daftarBarang;
+    }
+
     public void deleteAnggota(long id) {
         for (int i = 0; i < this.daftarAnggota.size(); i++) {
             if (daftarAnggota.get(i).getId() == id) {
                 daftarAnggota.remove(i);
-                System.out.println("Anggota dengan ID Anggota : "+id+"\nBerhasil Dihapus");
-            }
-            else{
+                System.out.println("Anggota dengan ID Anggota : " + id + "\nBerhasil Dihapus");
+            } else {
                 System.out.println("Data tidak ditemukan");
             }
         }
@@ -154,13 +233,10 @@ public class Konsol {
         }
     }
 
-    public void displayPeminjaman(int i) {
-        daftarAnggota.get(i).displayPeminjaman();
-    }
-/**
- *
- * @author martaniatd
- */
+    /**
+     *
+     * @author martaniatd
+     */
     public void menuSatu() {
         System.out.print("Nama Petugas  : ");
         in.nextLine();
@@ -169,11 +245,12 @@ public class Konsol {
         id = in.nextLong();
         Petugas p = new Petugas(nama, id);
         addPetugas(p);
-        
+
         System.out.println("Petugas Berhasil Login!");
-        SavePetugas(daftarPetugas);
+        //SavePetugas(daftarPetugas);
     }
-    public void menuSebelas(){
+
+    public void menuSebelas() {
         System.out.println("Data Petugas");
         displayPetugas();
     }
@@ -184,7 +261,8 @@ public class Konsol {
         nama = in.nextLine();
         System.out.print("Id Anggota    : ");
         id = in.nextLong();
-        Anggota a = new Anggota(nama, id);
+        String kota = in.next();
+        Anggota a = new Anggota(nama, id, kota);
         addAnggota(a);
         displayAnggota();
     }
@@ -210,7 +288,7 @@ public class Konsol {
     public void menuEmpat() {
         System.out.print("ID Anggota : ");
         long id = in.nextLong();
-        deleteAnggota(id);        
+        deleteAnggota(id);
     }
 
     public void menuLima() {
@@ -264,18 +342,6 @@ public class Konsol {
         }
     }
 
-    public void menuDelapan() {
-        System.out.print("ID Anggota : ");
-        long idAnggota = in.nextLong();
-        System.out.print("ID Peminjaman: ");
-        id = in.nextLong();
-        for (int i = 0; i < this.daftarAnggota.size(); i++) {
-            if (daftarAnggota.get(i).getId() == idAnggota) {
-                displayPeminjaman(i);
-            }
-        }
-    }
-
     public void menuSembilan() {
         System.out.print("ID Anggota : ");
         long idAnggota = in.nextLong();
@@ -283,11 +349,12 @@ public class Konsol {
         id = in.nextLong();
         Ngembaliin(idAnggota, id);
     }
-/**
- *
- * @author martaniatd
- */
-    public void mainMenu() {
+
+    /**
+     *
+     * @author martaniatd
+     */
+    /*   public void mainMenu() {
         int pilihan;
         System.out.println("==============================================");
         System.out.println("Sistem Informasi Pengelolaan Peminjaman Barang");
@@ -320,10 +387,10 @@ public class Konsol {
                     break;
                 case 3:
                     System.out.println("Add Anggota");
-                    menuDua();                    
+                    menuDua();
                     break;
                 case 4:
-                    System.out.println("Add Barang");    
+                    System.out.println("Add Barang");
                     menuTiga();
                     break;
                 case 5:
@@ -355,5 +422,5 @@ public class Konsol {
                     displayBarang();
             }
         } while (pilihan != 0);
-    }
+    }*/
 }

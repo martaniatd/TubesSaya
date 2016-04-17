@@ -5,17 +5,23 @@
  */
 package javaapplication1;
 
+import java.io.Serializable;
+
 /**
  *
  * @author idoarif
  */
-public abstract class Orang {
+public abstract class Orang implements Serializable{
     private String nama;
     private long id;
     public Orang (String nama,Long id){
         setNama(nama);
         setId(id);
     }
+
+    public Orang() {
+    }
+    
     public void setNama(String nama){
         this.nama=nama;
     }

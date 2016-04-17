@@ -5,9 +5,11 @@
  */
 package javaapplication1;
 
+import Controller.Controller;
+
 /**
  *
- * @author martaniadewi
+ * @author idoarif
  */
 public class JavaApplication1 {
 
@@ -16,7 +18,8 @@ public class JavaApplication1 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Konsol k=new Konsol();
-        k.mainMenu();
+//        Konsol k=new Konsol();
+//        k.mainMenu();
+        Controller c = new Controller();
     }
 }
