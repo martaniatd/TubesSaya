@@ -67,21 +67,19 @@ public class question extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 51, 102));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Light", 1, 11)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("ANDA YAKIN INGIN MENGHAPUS DATANYA ?");
 
-        ButtonNO.setFont(new java.awt.Font("Segoe UI Light", 1, 11)); // NOI18N
-        ButtonNO.setForeground(new java.awt.Color(0, 0, 255));
+        ButtonNO.setForeground(new java.awt.Color(0, 51, 102));
         ButtonNO.setText("TIDAK");
-        ButtonNO.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
+        ButtonNO.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        ButtonYES.setFont(new java.awt.Font("Segoe UI Light", 1, 11)); // NOI18N
-        ButtonYES.setForeground(new java.awt.Color(0, 0, 255));
+        ButtonYES.setForeground(new java.awt.Color(0, 51, 102));
         ButtonYES.setText("YA");
-        ButtonYES.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
+        ButtonYES.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -107,7 +105,7 @@ public class question extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ButtonYES, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ButtonNO, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

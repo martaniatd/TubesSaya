@@ -514,7 +514,7 @@ public class Controller implements ActionListener {
             nf.setVisible(true);
         } else if (e.getSource().equals(la.getButtonLoginAnggota())) {
             LoginAnggota();
-            //frame list Anggota
+            //frame listAnggota
         } else if (e.getSource().equals(listA.getButtonSelesai())) { //buat edit data anggota
             EditAnggota();
         } else if (e.getSource().equals(listA.getButtonKeluar())) {
@@ -533,6 +533,9 @@ public class Controller implements ActionListener {
             listA.setVisible(false);
             nf.setVisible(true);
         } else if (e.getSource().equals(listA.getButtonBack2())) {
+            listA.setVisible(false);
+            nf.setVisible(true);
+        } else if (e.getSource().equals(listA.getButtonBack3())) {
             listA.setVisible(false);
             nf.setVisible(true);
         } else if (e.getSource().equals(listA.getButtonSelesaiCreate())) {
